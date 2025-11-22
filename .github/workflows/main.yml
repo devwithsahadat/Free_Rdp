@@ -1,0 +1,24 @@
+name: Free Ubuntu RDP
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Desktop
+        run: |
+          sudo apt update
+          sudo apt install -y xfce4 xfce4-goodies xrdp
+          sudo systemctl enable xrdp
+          sudo systemctl start xrdp
+
+      - name: Install Tailscale
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+          sudo tailscale up --authkey=${{ secrets.TS_KEY }} --accept-routes --accept-dns
+
+      - name: Keep alive
+        run: |
+          while true; do sleep 3600; done
