@@ -23,7 +23,7 @@ jobs:
         run: |
           while true; do sleep 3600; done
 
-          - name: Set password
-  run: |
-    echo "ubuntu:123456" | sudo chpasswd
+      - name: Set password
+        run: |
+          echo "ubuntu:123456" | sudo chpasswd
 
